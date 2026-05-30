@@ -1,0 +1,143 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-01-01 00:00:00.000000",
+ "doctype": "DocType",
+ "document_type": "Document",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "backend",
+  "enabled",
+  "column_break_1",
+  "presigned_url_expiry_seconds",
+  "section_s3",
+  "endpoint",
+  "region",
+  "bucket_name",
+  "column_break_2",
+  "access_key",
+  "secret_key",
+  "section_local",
+  "root_path"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Title",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "backend",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Backend",
+   "options": "S3 Compatible\nLocal",
+   "reqd": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Enabled"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "10800",
+   "description": "Seconds a presigned S3 URL remains valid (default 3 hours)",
+   "fieldname": "presigned_url_expiry_seconds",
+   "fieldtype": "Int",
+   "label": "Presigned URL Expiry (seconds)"
+  },
+  {
+   "fieldname": "section_s3",
+   "fieldtype": "Section Break",
+   "label": "S3 Configuration",
+   "depends_on": "eval:doc.backend == 'S3 Compatible'"
+  },
+  {
+   "description": "Hostname only, e.g. fsn1.your-objectstorage.com or s3.amazonaws.com",
+   "fieldname": "endpoint",
+   "fieldtype": "Data",
+   "label": "Endpoint",
+   "mandatory_depends_on": "eval:doc.backend == 'S3 Compatible'"
+  },
+  {
+   "fieldname": "region",
+   "fieldtype": "Data",
+   "label": "Region"
+  },
+  {
+   "fieldname": "bucket_name",
+   "fieldtype": "Data",
+   "label": "Bucket Name",
+   "mandatory_depends_on": "eval:doc.backend == 'S3 Compatible'"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "access_key",
+   "fieldtype": "Data",
+   "label": "Access Key",
+   "mandatory_depends_on": "eval:doc.backend == 'S3 Compatible'"
+  },
+  {
+   "fieldname": "secret_key",
+   "fieldtype": "Password",
+   "label": "Secret Key",
+   "mandatory_depends_on": "eval:doc.backend == 'S3 Compatible'"
+  },
+  {
+   "fieldname": "section_local",
+   "fieldtype": "Section Break",
+   "label": "Local Configuration",
+   "depends_on": "eval:doc.backend == 'Local'"
+  },
+  {
+   "description": "Absolute path on disk that overrides the default Frappe private/files root",
+   "fieldname": "root_path",
+   "fieldtype": "Data",
+   "label": "Root Path",
+   "mandatory_depends_on": "eval:doc.backend == 'Local'"
+  }
+ ],
+ "is_submittable": 0,
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2025-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Frappe Vault",
+ "name": "Vault Storage",
+ "naming_rule": "By fieldname",
+ "autoname": "field:title",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_index": 0,
+ "sort_field": "title",
+ "sort_order": "ASC",
+ "states": [],
+ "track_changes": 1
+}
