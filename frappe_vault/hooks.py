@@ -9,6 +9,18 @@ app_email = "dev@skillwave.ke"
 app_license = "MIT"
 app_version = "0.1.0"
 
+required_apps = ["frappe"]
+
+add_to_apps_screen = [
+    {
+        "name": "frappe_vault",
+        "logo": "/assets/frappe_vault/images/logo.png",
+        "title": "Frappe Vault",
+        "route": "/frappe_vault",
+        "has_permission": "frappe_vault.utils.check_app_permission",
+    }
+]
+
 # ---------------------------------------------------------------------------
 # DocType class override – VaultFile replaces the core File controller so
 # that every File document gains vault-aware behaviour automatically.
