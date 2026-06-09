@@ -21,6 +21,7 @@ from typing import TYPE_CHECKING
 import frappe
 from frappe import _
 from frappe.core.doctype.file.file import File
+from frappe.model.document import Document
 from frappe.utils.password import get_decrypted_password
 
 if TYPE_CHECKING:
@@ -45,7 +46,7 @@ def _get_vault_storage(name: str) -> "VaultStorage":
 # VaultStorage Document
 # ---------------------------------------------------------------------------
 
-class VaultStorage(frappe.Document):
+class VaultStorage(Document):
     # Frappe metadata
     # (doctype, module are inferred from the JSON; listed here for IDE support)
     title: str

@@ -1,42 +1,48 @@
 {
- "app": "frappe_vault",
- "content": "[{\"id\":\"fv_c1\",\"type\":\"card\",\"data\":{\"card_name\":\"File Storage\",\"col\":4}}]",
- "creation": "2026-06-07 00:00:00.000000",
- "docstatus": 0,
+ "charts": [],
+ "content": "[{\"id\":\"sc1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vault Storage\",\"col\":3}},{\"id\":\"card1\",\"type\":\"card\",\"data\":{\"card_name\":\"Storage\",\"col\":4}}]",
+ "custom_blocks": [],
  "doctype": "Workspace",
- "icon": "file",
- "idx": 1,
+ "icon": "🔒",
+ "indicator_color": "Grey",
  "is_hidden": 0,
  "label": "Frappe Vault",
  "links": [
   {
-   "doctype": "Workspace Link",
    "hidden": 0,
    "is_query_report": 0,
-   "label": "File Storage",
+   "label": "Storage",
+   "link_count": 0,
    "onboard": 0,
    "type": "Card Break"
   },
   {
-   "doctype": "Workspace Link",
    "hidden": 0,
    "is_query_report": 0,
    "label": "Vault Storage",
+   "link_count": 0,
    "link_to": "Vault Storage",
    "link_type": "DocType",
    "onboard": 1,
    "type": "Link"
   }
  ],
- "modified": "2026-06-07 00:00:00.000000",
- "modified_by": "Administrator",
  "module": "Frappe Vault",
  "name": "Frappe Vault",
- "owner": "Administrator",
+ "number_cards": [],
  "public": 1,
+ "quick_lists": [],
  "restrict_to_domain": "",
- "sequence_id": 50.0,
- "shortcuts": [],
- "title": "Frappe Vault",
- "type": "Workspace"
+ "roles": [],
+ "sequence_id": 1.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Vault Storage",
+   "link_to": "Vault Storage",
+   "type": "DocType"
+  }
+ ],
+ "title": "Frappe Vault"
 }

@@ -1,0 +1,31 @@
+[
+ {
+  "doctype": "Custom Field",
+  "name": "File-vault_storage",
+  "dt": "File",
+  "fieldname": "vault_storage",
+  "fieldtype": "Link",
+  "options": "Vault Storage",
+  "label": "Vault Storage",
+  "insert_after": "file_url",
+  "description": "Vault Storage backend that holds this file",
+  "hidden": 1,
+  "read_only": 1,
+  "in_list_view": 0,
+  "bold": 0
+ },
+ {
+  "doctype": "Custom Field",
+  "name": "File-vault_storage_key",
+  "dt": "File",
+  "fieldname": "vault_storage_key",
+  "fieldtype": "Data",
+  "label": "Vault Storage Key",
+  "insert_after": "vault_storage",
+  "description": "Object key (path) within the Vault Storage bucket",
+  "hidden": 1,
+  "read_only": 1,
+  "in_list_view": 0,
+  "bold": 0
+ }
+]

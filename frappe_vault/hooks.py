@@ -14,9 +14,9 @@ required_apps = ["frappe"]
 add_to_apps_screen = [
     {
         "name": "frappe_vault",
-        "logo": "/assets/frappe_vault/images/logo.png",
+        "logo": "/assets/frappe_vault/images/logo.svg",
         "title": "Frappe Vault",
-        "route": "/frappe_vault",
+        "route": "/desk/frappe-vault",
         "has_permission": "frappe_vault.utils.check_app_permission",
     }
 ]
