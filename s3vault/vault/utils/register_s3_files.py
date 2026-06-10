@@ -1,5 +1,5 @@
 """
-frappe_vault.frappe_vault.utils.register_s3_files
+s3vault.vault.utils.register_s3_files
 ==================================================
 
 Bulk-register existing S3 objects as Frappe File documents linked to a
@@ -8,7 +8,7 @@ given Vault Storage backend.
 Usage (from bench shell):
 
     bench --site <site> execute \
-        frappe_vault.frappe_vault.utils.register_s3_files.run \
+        s3vault.vault.utils.register_s3_files.run \
         --kwargs '{
             "vault_storage": "My-S3-Backend",
             "prefix": "busara/library/pdfs/",
@@ -91,7 +91,7 @@ def run(
         )
         if existing:
             result["skipped"] += 1
-            frappe.logger("frappe_vault").debug(
+            frappe.logger("s3vault").debug(
                 f"Skipping {object_key!r}: already registered as {existing!r}"
             )
             continue
@@ -99,7 +99,7 @@ def run(
         filename = os.path.basename(object_key) or object_key
 
         if dry_run:
-            frappe.logger("frappe_vault").info(f"[dry-run] Would create File for {object_key!r}")
+            frappe.logger("s3vault").info(f"[dry-run] Would create File for {object_key!r}")
             result["created"] += 1
             continue
 
@@ -132,13 +132,13 @@ def run(
             )
 
             result["created"] += 1
-            frappe.logger("frappe_vault").info(
+            frappe.logger("s3vault").info(
                 f"Created File {file_doc.name!r} for S3 object {object_key!r}"
             )
 
         except Exception as exc:  # noqa: BLE001
             err_msg = str(exc)
-            frappe.logger("frappe_vault").error(
+            frappe.logger("s3vault").error(
                 f"Failed to create File for {object_key!r}: {err_msg}"
             )
             result["errors"].append((object_key, err_msg))
@@ -148,7 +148,7 @@ def run(
 
     # Summary
     mode = "[DRY-RUN] " if dry_run else ""
-    frappe.logger("frappe_vault").info(
+    frappe.logger("s3vault").info(
         f"{mode}register_s3_files complete: "
         f"listed={result['listed']}, "
         f"skipped={result['skipped']}, "

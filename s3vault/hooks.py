@@ -1,5 +1,5 @@
-app_name = "frappe_vault"
-app_title = "Frappe Vault"
+app_name = "s3vault"
+app_title = "S3 Vault"
 app_publisher = "County Network Kenya"
 app_description = (
     "Secure unified private file serving for Frappe/ERPNext — "
@@ -11,13 +11,16 @@ app_version = "0.1.0"
 
 required_apps = ["frappe"]
 
+# Desk app-switcher landing page (matches the Vault workspace slug)
+app_home = "/desk/vault"
+
 add_to_apps_screen = [
     {
-        "name": "frappe_vault",
-        "logo": "/assets/frappe_vault/images/logo.svg",
-        "title": "Frappe Vault",
-        "route": "/desk/frappe-vault",
-        "has_permission": "frappe_vault.utils.check_app_permission",
+        "name": "s3vault",
+        "logo": "/assets/s3vault/images/logo.svg",
+        "title": "S3 Vault",
+        "route": "/desk/vault",
+        "has_permission": "s3vault.utils.check_app_permission",
     }
 ]
 
@@ -26,7 +29,7 @@ add_to_apps_screen = [
 # that every File document gains vault-aware behaviour automatically.
 # ---------------------------------------------------------------------------
 override_doctype_class = {
-    "File": "frappe_vault.frappe_vault.doctype.vault_storage.vault_storage.VaultFile",
+    "File": "s3vault.vault.doctype.vault_storage.vault_storage.VaultFile",
 }
 
 # ---------------------------------------------------------------------------
@@ -34,7 +37,7 @@ override_doctype_class = {
 # Listed BEFORE the default Frappe renderer so we get first pick.
 # ---------------------------------------------------------------------------
 page_renderer = [
-    "frappe_vault.frappe_vault.doctype.vault_storage.vault_storage.VaultFileRenderer",
+    "s3vault.vault.doctype.vault_storage.vault_storage.VaultFileRenderer",
 ]
 
 # ---------------------------------------------------------------------------
@@ -43,7 +46,7 @@ page_renderer = [
 doc_events = {
     "File": {
         "after_delete": (
-            "frappe_vault.frappe_vault.doctype.vault_storage.vault_storage"
+            "s3vault.vault.doctype.vault_storage.vault_storage"
             ".hook_file_after_delete"
         ),
     }
@@ -59,6 +62,11 @@ fixtures = [
             ["dt", "=", "File"],
             ["fieldname", "in", ["vault_storage", "vault_storage_key"]],
         ],
+    },
+    # Desk sidebar entry — NOT auto-created from workspace JSONs (S006 gemba)
+    {
+        "dt": "Workspace Sidebar",
+        "filters": [["name", "in", ["Vault"]]],
     },
 ]
 

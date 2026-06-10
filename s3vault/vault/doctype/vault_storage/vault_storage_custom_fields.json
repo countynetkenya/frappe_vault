@@ -14,7 +14,7 @@
     "in_standard_filter": 0,
     "no_copy": 1,
     "translatable": 0,
-    "module": "Frappe Vault"
+    "module": "Vault"
   },
   {
     "doctype": "Custom Field",
@@ -31,6 +31,6 @@
     "no_copy": 1,
     "description": "S3 object key or local relative path managed by the linked Vault Storage",
     "translatable": 0,
-    "module": "Frappe Vault"
+    "module": "Vault"
   }
 ]

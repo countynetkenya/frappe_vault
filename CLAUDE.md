@@ -1,4 +1,4 @@
-# frappe_vault — Claude Code Context
+# s3vault — Claude Code Context
 
 **Boot:** `../CLAUDE.md` (lean) → `../STATE.md`. Load `../sw/*` per task — **always `../sw/anti-reinvention.md` before building.**
 **Skills:** `/frappe-dev` (how-to-implement) for controller/hook work; `/frappe-data-access` for querying vault data. On any conflict, `../sw/` wins.
@@ -9,13 +9,13 @@
 
 | Key | Value |
 |---|---|
-| Name | frappe_vault |
-| Title | Frappe Vault |
+| Name | s3vault |
+| Title | S3 Vault |
 | Version | 0.1.0 |
 | Purpose | Secure unified private file serving — presigned S3 URLs for all private files in busara_library |
-| Repo | https://github.com/countynetkenya/frappe_vault |
-| Staging path | /home/ubuntu/ERPNext/staging/apps/frappe_vault/ |
-| Local path | ~/bench-dev/apps/frappe_vault/ (WSL2) |
+| Repo | https://github.com/countynetkenya/s3vault |
+| Staging path | /home/ubuntu/ERPNext/staging/apps/s3vault/ |
+| Local path | ~/bench-dev/apps/s3vault/ (WSL2) |
 
 ---
 
@@ -33,7 +33,7 @@
 
 ## Architecture
 
-### Core Components (all in `frappe_vault/doctype/vault_storage/vault_storage.py`)
+### Core Components (all in `s3vault/doctype/vault_storage/vault_storage.py`)
 
 ```
 VaultStorage (frappe.Document)
@@ -63,15 +63,15 @@ hook_file_after_delete(doc, method)
 
 ```python
 override_doctype_class = {
-    "File": "frappe_vault.frappe_vault.doctype.vault_storage.vault_storage.VaultFile"
+    "File": "s3vault.vault.doctype.vault_storage.vault_storage.VaultFile"
 }
 
 page_renderer = [
-    "frappe_vault.frappe_vault.doctype.vault_storage.vault_storage.VaultFileRenderer"
+    "s3vault.vault.doctype.vault_storage.vault_storage.VaultFileRenderer"
 ]
 
 doc_events = {
-    "File": {"after_delete": "frappe_vault.frappe_vault.doctype.vault_storage.vault_storage.hook_file_after_delete"}
+    "File": {"after_delete": "s3vault.vault.doctype.vault_storage.vault_storage.hook_file_after_delete"}
 }
 
 fixtures = [
@@ -80,20 +80,20 @@ fixtures = [
 
 add_to_apps_screen = [
     {
-        "name": "frappe_vault",
-        "logo": "/assets/frappe_vault/images/logo.png",  # ← logo.png now exists
-        "title": "Frappe Vault",
-        "route": "/frappe_vault",
-        "has_permission": "frappe_vault.utils.check_app_permission",
+        "name": "s3vault",
+        "logo": "/assets/s3vault/images/logo.png",  # ← logo.png now exists
+        "title": "S3 Vault",
+        "route": "/s3vault",
+        "has_permission": "s3vault.utils.check_app_permission",
     }
 ]
 ```
 
 ### Workspace
 
-- Workspace JSON: `frappe_vault/frappe_vault/fixtures/Workspace.json` (fixture approach, like busara_library)
-- Module Def: "Frappe Vault" (registered in `frappe_vault/frappe_vault/modules.txt`)
-- Desk URL: `/app/frappe-vault` → should load after `bench migrate`
+- Workspace JSON: `s3vault/vault/fixtures/Workspace.json` (fixture approach, like busara_library)
+- Module Def: "S3 Vault" (registered in `s3vault/vault/modules.txt`)
+- Desk URL: `/app/vault` → should load after `bench migrate`
 
 ---
 
@@ -110,7 +110,7 @@ Student browser
   → VaultFileRenderer checks auth → generates presigned URL → 302 redirect
 ```
 
-**Rule: busara_library must NEVER generate S3 URLs directly. All file access goes through frappe_vault.**
+**Rule: busara_library must NEVER generate S3 URLs directly. All file access goes through s3vault.**
 
 ---
 
@@ -143,7 +143,7 @@ Student browser
 
 ## Utils
 
-`frappe_vault/utils.py`:
+`s3vault/utils.py`:
 ```python
 def check_app_permission() -> bool:
     return frappe.has_permission("File", throw=False)

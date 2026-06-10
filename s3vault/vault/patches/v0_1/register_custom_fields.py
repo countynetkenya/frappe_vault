@@ -7,7 +7,7 @@ Frappe reads patches.txt in the app root and runs each line once per site,
 tracking execution in `__PatchLog`.  Safe to re-run via:
 
     bench --site <site> run-patch \
-        frappe_vault.frappe_vault.patches.v0_1.register_custom_fields.execute
+        s3vault.vault.patches.v0_1.register_custom_fields.execute
 """
 
 import frappe

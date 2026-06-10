@@ -1,10 +1,10 @@
-# frappe_vault
+# s3vault
 
-[![CI](https://github.com/county-network-kenya/frappe_vault/actions/workflows/ci.yml/badge.svg)](https://github.com/county-network-kenya/frappe_vault/actions/workflows/ci.yml)
+[![CI](https://github.com/county-network-kenya/s3vault/actions/workflows/ci.yml/badge.svg)](https://github.com/county-network-kenya/s3vault/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Frappe v16](https://img.shields.io/badge/Frappe-%3E%3D16.0-blue)](https://frappeframework.com)
 
-**frappe_vault** is an open-source Frappe app that provides secure, unified
+**s3vault** is an open-source Frappe app that provides secure, unified
 private file serving for Frappe/ERPNext sites.  It replaces Frappe's default
 file serving with a permission-aware, backend-agnostic approach supporting:
 
@@ -54,10 +54,10 @@ Any endpoint that speaks the S3 API (AWS Signature v4) works.
 
 ```bash
 # 1. Get the app
-bench get-app https://github.com/county-network-kenya/frappe_vault
+bench get-app https://github.com/county-network-kenya/s3vault
 
 # 2. Install on your site
-bench --site <your-site> install-app frappe_vault
+bench --site <your-site> install-app s3vault
 
 # 3. Run migrations (installs Custom Fields on the File DocType)
 bench --site <your-site> migrate
@@ -72,7 +72,7 @@ bench --site <your-site> migrate
 
 ### 1 — Create a Vault Storage document
 
-Go to **Frappe Vault → Vault Storage → New** and fill in:
+Go to **S3 Vault → Vault Storage → New** and fill in:
 
 **S3 Compatible backend:**
 
@@ -113,7 +113,7 @@ Frappe File documents:
 
 ```bash
 bench --site <your-site> execute \
-    frappe_vault.frappe_vault.utils.register_s3_files.run \
+    s3vault.vault.utils.register_s3_files.run \
     --kwargs '{
         "vault_storage": "Hetzner-FSN1",
         "prefix": "pdfs/",
@@ -129,7 +129,7 @@ Remove `"dry_run": true` to actually create the records.
 ## How it works
 
 ```
-Browser                 Frappe / frappe_vault          Storage
+Browser                 Frappe / s3vault          Storage
   |                            |                          |
   |-- GET /vault-file/ABC/x -->|                          |
   |                            |-- permission check       |
@@ -153,12 +153,12 @@ behave identically to core Frappe File documents.
 
 ```bash
 # Clone
-git clone https://github.com/county-network-kenya/frappe_vault
-cd frappe_vault
+git clone https://github.com/county-network-kenya/s3vault
+cd s3vault
 
 # Lint
 pip install ruff
-ruff check frappe_vault/
+ruff check s3vault/
 ```
 
 Pull requests are welcome!  Please open an issue first for significant changes.

@@ -1,5 +1,5 @@
 """
-frappe_vault — Vault Storage controller + VaultFile override + VaultFileRenderer.
+s3vault — Vault Storage controller + VaultFile override + VaultFileRenderer.
 
 Design:
   * VaultStorage  – Document subclass; caches a Minio client as a cached_property.
@@ -35,10 +35,10 @@ if TYPE_CHECKING:
 def _get_vault_storage(name: str) -> "VaultStorage":
     """Return a cached VaultStorage document (frappe request-level cache)."""
     cache_key = f"vault_storage::{name}"
-    doc = frappe.cache().hget("frappe_vault", cache_key)
+    doc = frappe.cache().hget("s3vault", cache_key)
     if doc is None:
         doc = frappe.get_doc("Vault Storage", name)
-        frappe.cache().hset("frappe_vault", cache_key, doc)
+        frappe.cache().hset("s3vault", cache_key, doc)
     return doc
 
 
@@ -342,10 +342,10 @@ def hook_file_after_delete(doc: VaultFile, method: str | None = None) -> None:
         storage = _get_vault_storage(doc.vault_storage)
         if storage.backend == "S3 Compatible" and storage.enabled:
             storage.client.remove_object(storage.bucket_name, doc.vault_storage_key)
-            frappe.logger("frappe_vault").info(
+            frappe.logger("s3vault").info(
                 f"Deleted S3 object {doc.vault_storage_key!r} from {storage.bucket_name!r}"
             )
     except Exception as exc:  # noqa: BLE001
-        frappe.logger("frappe_vault").warning(
+        frappe.logger("s3vault").warning(
             f"Could not delete S3 object {doc.vault_storage_key!r}: {exc}"
         )

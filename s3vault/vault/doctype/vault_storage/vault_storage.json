@@ -116,7 +116,7 @@
  "links": [],
  "modified": "2025-01-01 00:00:00.000000",
  "modified_by": "Administrator",
- "module": "Frappe Vault",
+ "module": "Vault",
  "name": "Vault Storage",
  "naming_rule": "By fieldname",
  "autoname": "field:title",

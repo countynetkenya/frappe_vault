@@ -6,7 +6,7 @@
  "icon": "🔒",
  "indicator_color": "Grey",
  "is_hidden": 0,
- "label": "Frappe Vault",
+ "label": "Vault",
  "links": [
   {
    "hidden": 0,
@@ -27,8 +27,8 @@
    "type": "Link"
   }
  ],
- "module": "Frappe Vault",
- "name": "Frappe Vault",
+ "module": "Vault",
+ "name": "Vault",
  "number_cards": [],
  "public": 1,
  "quick_lists": [],
@@ -44,5 +44,5 @@
    "type": "DocType"
   }
  ],
- "title": "Frappe Vault"
+ "title": "Vault"
 }

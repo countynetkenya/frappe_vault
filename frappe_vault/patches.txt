@@ -1,1 +1,0 @@
-frappe_vault.frappe_vault.patches.v0_1.register_custom_fields.execute

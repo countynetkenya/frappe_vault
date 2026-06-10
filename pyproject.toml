@@ -1,5 +1,5 @@
 [project]
-name = "frappe_vault"
+name = "s3vault"
 authors = [{ name = "County Network Kenya", email = "dev@skillwave.ke" }]
 description = "Secure unified private file serving for Frappe/ERPNext — local disk and S3-compatible object storage"
 requires-python = ">=3.10"
